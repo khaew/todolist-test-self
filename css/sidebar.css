@@ -1,0 +1,80 @@
+.sidebar {
+  transition: left 1s ease;
+  position: absolute;
+  top: 0px;
+  left: -200px;
+  border-right: 1px solid #172f5246;
+  width: 200px;
+  height: 100%;
+  background-color: white;
+} 
+
+.isSidebarOpen {
+  left: 0px;
+}
+
+.sidebar-toggle-button {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  right: -14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #172f5246;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  padding: 3px 1px;
+  height: 50px;
+  font-size: 10px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.sidebar-toggle-button:active {
+  background-color: white;
+  
+}
+
+.sidebar-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #172f5246;
+  padding: 10px;
+  height: 60px;
+  background-image: linear-gradient(to bottom right,white, white);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.sidebar-menu-list {
+  border-top: 1px solid  #172f5246;
+}
+
+.menu-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #172f5246;
+  height: 40px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.menu-items:hover {
+  background-color: #172f528f;
+  color : white;
+}
+
+.menu-items:active {
+  background-color: #172f52e0;
+  color : white;
+}
+
+.isMenuSelected {
+  background-color: white;
+  color : #172f52e0;
+}
