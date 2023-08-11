@@ -1,0 +1,110 @@
+.calendar {
+  display: grid;
+  border: 1px solid white;
+  padding : 15px;
+  width: 100%;
+  text-align: center;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+
+.calendar-grid{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding-bottom: 10px;
+  font-weight: 500;
+}
+
+
+.current-month{
+  font-weight: 700;
+}
+
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  font-weight: 500;
+
+
+}
+
+.calendar-cell {
+  border: 1px solid white;
+  padding: 5px;
+  cursor: pointer;
+  font-size : 13px;
+  
+}
+.calendar-cell:hover {
+  font-weight: bold;
+  background-color:  #365c9612; 
+  border-radius: 10%;
+}
+
+.thisday {
+  background-color:  #365c9646;
+  border-radius: 10%;
+  font-weight: bold;
+}
+
+.day{
+  margin-bottom: 10px;
+  font-weight : 700;
+}
+
+.prev-month-button:hover,
+.next-month-button:hover{
+  font-weight: 700;
+  cursor: pointer;
+  background-color: #365c9612; 
+}
+
+.todo-list-container{
+  width: 100%;
+  height: 300px;
+  margin-top : 20px;
+  padding: 15px;
+  border-top : 1px solid  #365c9646;
+  background-color: white;
+}
+
+.inner-list{
+  padding: 20px;
+  font-size : 20px;
+  font-weight: 700;
+  /* text-decoration: underline; */
+}
+.inner-box{
+  padding: 20px;
+  border: 1px solid white;
+  width: 100%;
+  height: 100%;
+  font-size : 15px;
+  font-weight: 300;
+  
+}
+.no-todo-message {
+  text-align: center;
+  font-size: 30px;
+  color: gray;
+}
+
+.todo-date-time{
+ font-size:13px;
+}
+.todo-content{
+ margin-top: 2px;
+ font-size:14px;
+ font-weight: 400;
+ text-decoration:#568de09b wavy underline;
+}
+  

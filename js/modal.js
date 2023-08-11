@@ -23,23 +23,24 @@ const modifySubmitButtonOnClick = (id) => {
 }
 
 const modifyModal = (todo) => {
+    openModal(); // 모달 열기 추가
     const modal = document.querySelector(".modal");
     modal.innerHTML = `
         <div class="modal-container">
             <header class="modal-header">
                 <h1 class="modal-title">
-                    ToDo 수정
+                    Modify
                 </h1>
             </header>
             <main class="modal-main">
                 <p class="modal-message">
-                    ToDo를 수정해주세요.
+                    Write
                 </p>
                 <input type="text" class="text-input w-f" value="${todo.todoContent}">
             </main>
             <footer class="modal-footer">
-                <button class="btn" onclick="modifySubmitButtonOnClick(${todo.id}); closeModal();">확인</button>
-                <button class="btn" onclick="closeModal();">닫기</button>
+                <button class="btn" onclick="modifySubmitButtonOnClick(${todo.id}); closeModal();">Check</button>
+                <button class="btn" onclick="closeModal();">Close</button>
             </footer>
         </div>
     `;

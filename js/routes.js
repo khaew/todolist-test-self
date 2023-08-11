@@ -22,6 +22,10 @@ class Routes {
               const todolistPage = document.querySelector(".todolist-page-container");
               todolistPage.classList.remove("invisible");
               break;
+          case "monthly":
+              const monthlyPage = document.querySelector(".monthly-page-container");
+              monthlyPage.classList.remove("invisible");
+              break;
       }
   }
 

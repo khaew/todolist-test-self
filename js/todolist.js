@@ -1,25 +1,4 @@
 const addTodoButtonOnClickHandle = () => {
-    // spread 문법
-    // const testObj = {
-    //     name: "김준일",
-    //     age: 10
-    // }
-
-    // console.log(testObj);
-
-    // const testObj2 = {
-    //     ...testObj,
-    //     address: "부산",
-    //     name: "김준이"
-    // }
-    
-    // console.log(testObj2);
-
-    // const testArray = [1,2,3,4,5];
-    // console.log(testArray);
-    // const testArray2 = [...testArray, 6,7,8];
-    // console.log(testArray2);
-
     generateTodoObj();
 }
 
@@ -29,7 +8,23 @@ const addTodoOnKeyUpHandle = (event) => {
     }
 }
 
+
+
+function dropFinishOnChangeHandle(selectElement) {
+    const selectedValue = selectElement.value;
+    TodoListService.getInstance().updateTodoList(selectedValue); 
+}
+
+
+
+
+function toggleComplete(element) {
+    element.classList.toggle("completed");
+  }
+  
+
 const checkedOnChangeHandle = (target) => {
+    toggleComplete(target.parentNode.parentNode);
     TodoListService.getInstance().setCompleStatus(target.value, target.checked);
 }
 
@@ -39,17 +34,22 @@ const modifyTodoOnClickHandle = (target) => {
 }
 
 const deleteTodoOnClickHandle = (target) => {
-    TodoListService.getInstance().removeTodo(target.value);
+    const itemId = target.value;
+    TodoListService.getInstance().removeTodo(itemId);
 }
 
 const generateTodoObj = () => {
     const todoContent = document.querySelector(".todolist-header-items .text-input").value;
+    const selectedDate = document.querySelector(".class-date").value; 
+    const selectedTime = document.querySelector(".class-time").value; 
 
     const todoObj = {
-        id: 0,
+        id: this.todoIndex, 
         todoContent: todoContent,
         createDate: DateUtils.toStringByFormatting(new Date()),
-        completStatus: false
+        completStatus: false,
+        selectedDate: selectedDate,
+        selectedTime: selectedTime, 
     };
 
     TodoListService.getInstance().addTodo(todoObj);
@@ -72,9 +72,15 @@ class TodoListService {
     constructor() {
         this.loadTodoList();
     }
-    
+  
     // JSON.parse(제인슨 문자열) : 제이슨 문자열 -> 객체 
     // JSON.stringify(객체) : 객체 -> 제이슨 문자열
+
+    openModalForTodo = (todoId) => {
+        const todo = this.getTodoById(todoId);
+        modifyModal(todo);
+        this.openModal();
+    }
 
     loadTodoList() {
         this.todoList = !!localStorage.getItem("todoList") ? JSON.parse(localStorage.getItem("todoList")) : new Array();
@@ -138,29 +144,67 @@ class TodoListService {
         this.saveLocalStorage();
         this.updateTodoList();
     }
+  
+    getFilteredTodoList(filterOption) {
+        if (filterOption === "Finish!") {
+            return this.todoList.filter(todo => todo.completStatus === true);
+        } else if (filterOption === "On-going") {
+            return this.todoList.filter(todo => todo.completStatus === false);
+        } else {
+            return this.todoList;
+        }
+    }
+    getTodoListByDate(date) {
+        return this.todoList.filter(todo => {
+            const todoDate = new Date(todo.selectedDate);
+            return (
+                todoDate.getDate() === date.getDate() &&
+                todoDate.getMonth() === date.getMonth() &&
+                todoDate.getFullYear() === date.getFullYear()
+            );
+        });
+    }
 
-    updateTodoList() {
+    updateTodoList(filterOption) {
         const todolistMainContainer = document.querySelector(".todolist-main-container");
-
-        todolistMainContainer.innerHTML = this.todoList.map(todo => {
+        const filteredTodoList = this.getFilteredTodoList(filterOption);
+    
+        todolistMainContainer.innerHTML = filteredTodoList.map(todo => {
             return `
-                <li class="todolist-items">
-                    <div class="item-left">
-                        <input type="checkbox" id="complet-chkbox${todo.id}" class="complet-chkboxs" ${todo.completStatus ? "checked" : ""} value="${todo.id}" onchange="checkedOnChangeHandle(this);">
-                        <label for="complet-chkbox${todo.id}"></label>
+            <li class="todolist-items" id="todoItem-${todo.id}"> 
+            <div class="item-left">
+                <input type="checkbox" id="complet-chkbox${todo.id}" class="complet-chkboxs" ${todo.completStatus ? "checked" : ""} value="${todo.id}" onchange="checkedOnChangeHandle(this);">
+                <label for="complet-chkbox${todo.id}"></label>
                     </div>
                     <div class="item-center">
-                        <pre class="todolist-content">${todo.todoContent}</pre>
+                    <p class="selected-datetime">${todo.selectedDate} ${todo.selectedTime}</p>
+                    <div class="todolist-content" data-todo-id="${todo.id}">${todo.todoContent}</div>
+
+
+
                     </div>
+                </div>
                     <div class="item-right">
-                        <p class="todolist-date">${todo.createDate}</p>
                         <div class="todolist-item-buttons">
-                            <button class="btn btn-edit" value="${todo.id}" onclick="modifyTodoOnClickHandle(this);">수정</button>
-                            <button class="btn btn-remove" value="${todo.id}" onclick="deleteTodoOnClickHandle(this);">삭제</button>
+                         
+                            <button class="btn btn-remove" value="${todo.id}" onclick="deleteTodoOnClickHandle(this);"> x </button>
                         </div>
                     </div>
                 </li>
             `;
         }).join("");
+
+        todolistMainContainer.addEventListener("click", (event) => {
+            const target = event.target;
+            if (target.classList.contains("todolist-content")) {
+                const todoId = target.getAttribute("data-todo-id");
+                this.openModalForTodo(todoId);
+            }
+        });
+    
+
+
     }
 }
+
+

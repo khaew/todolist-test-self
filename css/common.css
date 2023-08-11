@@ -21,8 +21,14 @@
   border-radius: 4px;
   padding: 5px 10px;
   background-color: white;
-  font-weight: 600;
+  font-size : 12px;
+  font-weight: 300;
   cursor: pointer;
+}
+
+.btn:hover {
+  background-color:  #172f5246;
+  color : white;
 }
 
 .btn:active {
@@ -31,7 +37,7 @@
 }
 
 .main-container {
-  padding: 20px;
+  padding: 70px;
   width: 100%;
   height: 100%;
 }
@@ -54,7 +60,12 @@
 .w-f {
   width: 100%;
 }
+.w-f:hover {
+  background-color: #172f5246;
+  color : white;
+}
 
 .w-f:active {
+  background-color:  #172f52a1;
   color:white
 }

@@ -1,5 +1,5 @@
 .sidebar {
-  transition: left 1s ease;
+  transition: left 1s ease;  
   position: absolute;
   top: 0px;
   left: -200px;
@@ -16,30 +16,40 @@
 .sidebar-toggle-button {
   position: absolute;
   transform: translateY(-50%);
-  top: 50%;
-  right: -14px;
+  top: 5%;
+  right: -90px;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid #172f5246;
-  border-top-right-radius: 4px;
+  border-right: 10px solid #172f52a0;
+  border-top-right-radius: 0.5px;
   border-bottom-right-radius: 4px;
   padding: 3px 1px;
-  height: 50px;
-  font-size: 10px;
+  height: 40px;
+  width: 90px;
+  text-shadow:  #172f52a0;
+  font: 100;
+  font-size: 14px;
   background-color: white;
   cursor: pointer;
+  box-shadow:1px 1px 3px#172f5246; 
 }
 
-.sidebar-toggle-button:active {
+.sidebar-toggle-button:hover {
   background-color: white;
-  
+  text-decoration: underline ;
+}
+.sidebar-toggle-button:active {
+  text-decoration: underline ;
+  background-color:#172f52a0;
+  color :  white;
 }
 
 .sidebar-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: flex;  /*block-세로정렬, flex-가로정렬*/
+  justify-content: center;/*수평중앙정렬*/
+  align-items: center; /*수직중앙정렬*/
   margin-bottom: 10px;
   border-bottom: 2px solid #172f5246;
   padding: 10px;
@@ -52,11 +62,11 @@
 .sidebar-menu-list {
   border-top: 1px solid  #172f5246;
 }
-
+/* https://studiomeal.com/archives/197 */
 .menu-items {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: flex;  /*block-세로정렬, flex-가로정렬*/
+  justify-content: center; /*수평중앙정렬*/
+ align-items: center; /*수직중앙정렬*/
   border-bottom: 1px solid #172f5246;
   height: 40px;
   font-size: 12px;
